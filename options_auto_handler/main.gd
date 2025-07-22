@@ -44,7 +44,8 @@ func Init_Option(OptionKey: String, DefaultValue: Variant = null) -> int:
 		return ReturnCodes.PARAM_ALREADY_EXISTS
 
 	_DefaultOptions[OptionKey] = DefaultValue
-	_LoadedOptions.get_or_add(OptionKey, DefaultValue)
+	if !_LoadedOptions.has(OptionKey):
+		_LoadedOptions[OptionKey] = DefaultValue
 	_dirty = true
 	emit_signal("OptionInitialized", OptionKey)
 	return ReturnCodes.OK
@@ -114,7 +115,7 @@ func Load_Options_From_Disk() -> int:
 		push_warning(_plugin_name + ": Invalid or corrupt options file.")
 		return ReturnCodes.CORRUPT_DATA
 	_LoadedOptions = unsanitize_json(parsed)
-	for key: String in _DefaultOptions.keys():
+	for key in _DefaultOptions.keys():
 		if !_LoadedOptions.has(key):
 			_LoadedOptions[key] = _DefaultOptions[key]
 	emit_signal("OptionsLoaded")
