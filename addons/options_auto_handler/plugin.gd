@@ -49,6 +49,12 @@ const _CUSTOM_NODES := [
 		"VSlider",
 		preload("res://addons/options_auto_handler/nodes/VSliderOption.gd"),
 		preload("res://addons/options_auto_handler/icons/vslider_option.svg")
+	],
+	[
+		"SpinBoxOption",
+		"SpinBox",
+		preload("res://addons/options_auto_handler/nodes/SpinBoxOption.gd"),
+		preload("res://addons/options_auto_handler/icons/spinbox_option.svg")
 	]
 ]
 
